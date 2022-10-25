@@ -1,34 +1,46 @@
-                const readline = require('readline').createInterface({
-                    input: process.stdin,
-                    output: process.stdout
-                });
+function sentenceGen() {
 
-                let names = ['Peter', 'Michel', 'Jana', 'Ivan', 'Jordan'];
-                let places = ['Sofia', 'Plovdiv', 'Varna', 'Montana', 'Haskovo'];
-                let verbs = ['eats', 'holds', 'sees', 'plays with'];
-                let nouns = ['stones', 'cake', 'apple', 'laptop', 'bikes'];
-                let adverbs = ['slowly', 'diligently', 'warmly', 'sadly', 'rapidly'];
-                let details = ['near the river', 'at home', 'in the park', 'in the desert', 'in the restaurant'];
+    const readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-                function getRandomWord(array) {
-                    let word = array[Math.floor(Math.random() * array.length)];
-                    return word;
-                }
+    let names = ['Peter', 'Michel', 'Jana', 'Ivan', 'Jordan'];
+    let places = ['Sofia', 'Plovdiv', 'Varna', 'Montana', 'Haskovo'];
+    let verbs = ['eats', 'holds', 'sees', 'plays with'];
+    let nouns = ['stones', 'cake', 'apple', 'laptop', 'bikes'];
+    let adverbs = ['slowly', 'diligently', 'warmly', 'sadly', 'rapidly'];
+    let details = ['near the river', 'at home', 'in the park', 'in the desert', 'in the restaurant'];
 
-                let randomName = getRandomWord(names);
-                let randomPlace = getRandomWord(places);
-                let randomVerb = getRandomWord(verbs);
-                let randomNouns = getRandomWord(nouns);
-                let randomAdverb = getRandomWord(adverbs);
-                let randomDetail = getRandomWord(details);
+    function getRandomWord(array) {
+        let word = array[Math.floor(Math.random() * array.length)];
+        return word;
+    }
 
-                let who = `${randomName} from ${randomPlace}`;
-                let action = `${randomAdverb} ${randomVerb} ${randomNouns}`;
-                let sentence = `${who} ${action} ${details}`;
+    let randomName = getRandomWord(names);
+    let randomPlace = getRandomWord(places);
+    let randomVerb = getRandomWord(verbs);
+    let randomNouns = getRandomWord(nouns);
+    let randomAdverb = getRandomWord(adverbs);
+    let randomDetail = getRandomWord(details);
 
-                console.log(`Hello, this is your first random-generated sentence:`);
-                console.log(sentence);
+    let who = `${randomName} from ${randomPlace}`;
+    let action = `${randomAdverb} ${randomVerb} ${randomNouns}`;
+    let sentence = `${who} ${action} ${randomDetail}.`;
 
+    console.log(`Hello, this is your first random-generated sentence:`);
+    console.log(sentence);
 
-                let recursiveAsyncReadline = function () {
-                        readline.question('Click [enter] to generate a new one', string =>{
+    let recursiveAsyncReadline = function () {
+        readline.question('Click [enter] to generate a new one', string => {
+
+            sentenceGen();
+            recursiveAsyncReadline();
+
+        });
+    };
+    recursiveAsyncReadline();
+}
+
+sentenceGen();
+
